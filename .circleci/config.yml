@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.9
+    working_directory: /go/src/gitub.com/laioffer/Around
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+          docker build -t 18qz33/wepost .
+          docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
+          docker push 18qz33/wepost
